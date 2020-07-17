@@ -34,7 +34,7 @@ Santa Says:
 ![Solution](images/open-letter.PNG)
 - Now we are only concerned about the messages written in all capital letters in the Subject field.
 
-                                    Objective 4: Windows Log Analysis: Determine Attacker Technique
+## Objective 4: Windows Log Analysis: Determine Attacker Technique
 ![]( images/Objective4-0.PNG)
 Walkthrough: SugarPlum Mary gives a clue: He mentions Sysmon and EQL. They also mention checking out a blog post about EQL by Josua WrightUpon searching I found this:
 https://www.sans.org/blog/eql-threat-hunting/
