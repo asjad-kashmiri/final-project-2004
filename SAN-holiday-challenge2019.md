@@ -219,3 +219,234 @@ In the next room click on the hanging keys and use the downloaded file (key) to 
 Walk through the door and at the end of the hall you&#39;ll see Krampus. When you click on him he tells you his full name. Krampus Hollyfeld.
 
 Entering his name into the field in the objective completes the challenge.
+
+                                              #Objective 8: Bypassing the Frido Sleigh CAPTEHA
+
+![]( images/Objective8-0.PNG)
+
+
+Walkthrough: Underlined within the objective is Frido Sleigh Contest and upon clicking the link we are taken to the fill out form page for the contest, embedded with a CAPTCHA challenge. Snippets are shown below:
+
+![]( images/Objective8-1.PNG)
+
+The captcha requires us to select the images they ask for within a time set of 5 seconds which is completely impossible. The hint within the objective states to go and visit Alabaster Snowball in the speaker unpreparedness room. 
+
+![]( images/Objective8-2.PNG)
+
+Apparently Alabaster Snowball is having trouble with his terminal and is stuck in a different shell rather than it being bash, so we must help him out. Click on the Nyan shell next to Mr. Snowball.
+
+![]( images/Objective8-3.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Following the instructions within the terminal we get:
+
+
+![]( images/Objective8-4.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We can clearly see this isn’t his normal terminal and he definitely has some explaining to do. Let’s open the Nyan terminal again and let’s try using cat etc/passwd - to show attributes for users on the machine, focusing to see what shell is linked to users:
+
+
+
+
+
+![]( images/Objective8-5.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+At the bottom we can see that nsh is set as the shell and not bash. We can look at the properties of the shell using ls -al /bin/nsh. Assuming we have permissions to edit /bin/nsh and copy over to /bin/nsh, we can easily allow Mr. Snowball to get his shell back. Let’s see:
+
+![]( images/Objective8-6.PNG)
+
+It seems that /bin/nsh is rewritable and an attempt to copy over /bin/bash to /bin/nsh, we get an error. We have to dig deeper, and by using ‘lsattr’, which is an extended version of viewing file attributes, and in this case we see that the letter ‘i’ appears. This means that the file is ‘IMMUTABLE’ meaning the file may not be tampered with. So, let’s just check to see what we can do with root permissions by running sudo -l
+
+![]( images/Objective8-7.PNG)
+
+We are able to use “chattr”, a change attribute command, and what we can do is removed the immutable symbol on /bin/nsh and try copying over the actual shell and replace it with bash instead. We can run sudo chattr -i /bin/nsh , which removes the immutable flag, then use cp /bin/bash /bin/sh to copy over the right shell. After, we should be able to successfully login.
+We then continue onwards to talking with alabaster, and he reminds us about that CAPTEHA challenge earlier explained. 
+
+![]( images/Objective8-8.PNG)
+
+  
+![]( images/Objective8-9.PNG)
+
+
+Apparently there are some references we can look at in order for us to complete the challenge. By clicking on your avatar, then clicking on Hints->Machine Learning you will be directed to this link, https://www.youtube.com/watch?v=jmVPLwjm_zs , this link refers back to the video to learn about machine learning use cases within cyber security and within the video there is a github repo which relates back to the challenge. https://github.com/chrisjd20/img_rec_tf_ml_demo , is the github link which we will use for the challenge. After watching the demo, we can see how we can use a set of images to train a machine learning setup and ultimately use to identify other images.
+
+![]( images/Objective8-10.PNG)
+
+Above are the files found within the repo /img_rec_tf_ml_demo. Since there is a foundation of resources, let’s see if we can find more hints. 
+
+
+
+
+
+![]( images/Objective8-11.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Since Krampus gave us a heads up on the contest, let’s go and speak with him to see what else he can say. 
+
+He gives us two links he would like us to work with:
+
+![]( images/Objective8-12.PNG)
+
+Clicking those two underlined links, allows us to download files, 12k images associated with an API interface he is building. We get a zip folder as a well as a python file, and unzipping the folder we see folders split show categories, the same as the CAPTEHA challenge. 
+
+![]( images/Objective8-13.PNG)
+
+We will use this with the script provided within the github repo. Before that let’s see how the api module works for the capetha request by visiting, “fridosleigh.com/api/capteha/request
+
+
+
+
+
+![]( images/Objective8-14.PNG)
+
+
+API stands for Application Programming Interface which is a set of functions and procedures allowing the creation of applications that access the features or data of an operating system, application, or other service. What we see is BASE64 encoded image information along with UUID’s for those images. Our job is to submit the right images which correspond with the encoded images in order to succesfully complete the CAPTEHA challenge. It is now our job to update the code for python file capteha_api.py
+The following code snippets are in order and will be added to the python file.
+
+
+
+
+
+    
+    url = "https://fridosleigh.com/"
+
+    # Create session
+    s = requests.Session()
+
+    # Get CAPTEHA images and types
+    r = s.post(f'{url}api/capteha/request')
+    if (r.json()['request']):
+      images = r.json()['images']
+      types = [x.strip() for x in r.json()['select_type'].split(',')]
+      types[-1] = types[-1].replace('and ', '')
+
+
+
+For this section of code, We first have to Request a CAPTEHA, store the image data, and parse out the image types we need to select for the challenege.
+
+    # Can use queues and threading to speed up the processing
+    q = queue.Queue()
+
+    # Going to iterate over each of our images.
+    for image in images:
+      img_uuid = image['uuid']
+      img_base64 = image['base64']
+      print('Processing Image {}'.format(img_uuid))
+
+    # We don't want to process too many images at once. 10 threads max
+    while len(threading.enumerate()) > 10:
+        time.sleep(0.0001)
+
+    # Predict_image function is expecting png image bytes so we read
+    # image as 'rb' to get a bytes object
+    image_bytes = base64.b64decode(img_base64)
+    threading.Thread(
+        target=predict_image,
+        args=(
+            q,
+            sess,
+            graph,
+            image_bytes,
+            img_uuid,
+            labels,
+            input_operation,
+            output_operation
+        )
+    ).start()
+    
+
+print('Waiting For Threads to Finish...')
+while q.qsize() < len(images):
+    time.sleep(0.001)
+
+    # Getting a list of all threads returned results
+    prediction_results = [q.get() for x in range(q.qsize())]
+
+For this set of code, we iterate over the images and for each image extract the UUID. UUID stands for “UNIVERSALLY UNIQUE IDENTIFIER”, which is a 128-bit number used to uniquely identify a type of object or entity within the internet. 
+Next we have to convert the BASE64 image data to binary, since machine language is in binary and uses both as input to process and predict the image. 
+We then must wait for all processing to finish (i.e. the queue size matches the number of images) and create a list containing the final prediction results.
+
+    answers = []
+
+    # What are we looking for?
+    print(f'Looking for {types}')
+
+    # Get the matching images
+    for prediction in prediction_results:
+      if prediction['prediction'] in types:
+         print(f"{prediction['img_uuid']} is a {prediction['prediction']}.")
+         answers.append(prediction['img_uuid'])
+
+    final_answer = ','.join(answers)
+
+
+Finally for this last piece of code, it gets looped over the prediction results and, if an image matches a requested type, add its UUID to the answer list. The rest of the untouched code from the original python file stays in place, only with the exception of changing the email within user info to retrieve the code. 
+
+![]( images/Objective8-15.PNG)
+
+After running the code you end up getting a message at the end of the program stating that the code has been sent to your email. Upon checking your email you can see that the code you receive is:
+
+
+
+
+
+
+
+# Answer: 8Ia8LiZEwvyZr2WO
+
+![]( /imagesObjective8-16.PNG)
+
