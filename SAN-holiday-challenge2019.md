@@ -33,6 +33,23 @@ Santa Says:
 
 ![Solution](images/open-letter.PNG)
 - Now we are only concerned about the messages written in all capital letters in the Subject field.
+## Objective 3 - Windows Log Analysis: Evaluate Attack Outcome
+![Solution](images/log-1.PNG)
+### We're given the event logs file, and tasked to find the account that was compromised using the password spray attack.
+- To parse through the log file, I used Event viewer which I found online. Event Viewer is a component of Microsoft's Windows NT operating system that lets administrators and users view the event logs on a local or remote machine. Applications and operating-system components can use this centralized log service to report events that have taken place, such as a failure to start a component or to complete an action
+![Solution](images/log-2.PNG)
+- We are looking for the log that shows an account that was compromised by the password-spraying attack.
+- Upon opening the log file in Event Log, I noticed that the Event ID 4624 shows “An Account Was Successfully Logged on”.
+![Solution](images/log-3.PNG)
+-  So, I filtered the log file using the event number. Reading through log entries I found 3 different account names that were compromised DC1$, supatree, pminstix. We can ignore DC1$ because that seems to be the Domain Controller.
+-  Now we must find which one of these accounts were compromised by the spray attack. (sprayPassword spraying is an attack that attempts to access a large number of accounts (usernames) with a few commonly used passwords) 
+-  Event ID 4625 shows failed logged in, we can use that to find out the correct compromised account. During a spray attack, if an account is compromised, it should have one less event with id 4625
+![Solution](images/log-4.PNG)
+-  Once again, I filtered the log file for event Id 4624 and 4625
+![Solution](images/log-5.PNG)
+-  I found the log that shows the account that was compromised by the password-spray attack.
+![Solution](images/log-6.PNG)
+- In this screenshot you can clearly see that all the id events are 4625 which means login attempts made by spray attack failed and after this failed attempt there is an event Id with 4624 which shows the account was successfully logged in and that account name is supatree.
 
 ## Objective 4: Windows Log Analysis: Determine Attacker Technique
 ![]( images/Objective4-0.PNG)
