@@ -295,6 +295,9 @@ We then continue onwards to talking with alabaster, and he reminds us about that
 Next we have to convert the BASE64 image data to binary, since machine language is in binary and uses both as input to process and predict the image. 
 We then must wait for all processing to finish (i.e. the queue size matches the number of images) and create a list containing the final prediction results.
 
+
+
+
     answers = []
 
     # What are we looking for?
@@ -307,6 +310,10 @@ We then must wait for all processing to finish (i.e. the queue size matches the 
          answers.append(prediction['img_uuid'])
 
     final_answer = ','.join(answers)
+    
+    
+    
+    
 
 - Finally for this last piece of code, it gets looped over the prediction results and, if an image matches a requested type, add its UUID to the answer list. The rest of the untouched code from the original python file stays in place, only with the exception of changing the email within user info to retrieve the code. 
 ![]( images/Objective8-15.PNG)
