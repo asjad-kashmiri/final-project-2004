@@ -11,11 +11,11 @@
 # I never heard of KringleCon, but it sounds awesome! I would love to jump on!
    Sounds great! You can join for FREE by simply visiting 
    https://holidayhackchallenge.com/2019/
-   Once you visit the site, you can scroll down to see a golden ticket displayed here:
+   Once you visit the site, you can scroll down to see a golden ticket displayed as such:
    
    <p align="center">
   <img width="460" height="300" src="images/goldenticket.PNG">
 </p>
-
-# Have Fun! Keep Learning and thank you for visiting this repository! Feel free to share!
+Follow the registration instructions and you should be good to go!
+# Have Fun! and thank you for visiting this repository! Feel free to share!
    
