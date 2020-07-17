@@ -279,7 +279,6 @@ We then must wait for all processing to finish (i.e. the queue size matches the 
 
     final_answer = ','.join(answers)
 
-
 - Finally for this last piece of code, it gets looped over the prediction results and, if an image matches a requested type, add its UUID to the answer list. The rest of the untouched code from the original python file stays in place, only with the exception of changing the email within user info to retrieve the code. 
 ![]( images/Objective8-15.PNG)
 
