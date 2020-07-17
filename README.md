@@ -1,3 +1,3 @@
-![]( images/README.PNG)
+![]( images/README.png)
 
 # Ho! Ho! Ho!
