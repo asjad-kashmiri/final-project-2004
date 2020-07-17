@@ -291,12 +291,7 @@ We then continue onwards to talking with alabaster, and he reminds us about that
     # Getting a list of all threads returned results
     prediction_results = [q.get() for x in range(q.qsize())]
 
-- For this set of code, we iterate over the images and for each image extract the UUID. UUID stands for “UNIVERSALLY UNIQUE IDENTIFIER”, which is a 128-bit number used to uniquely identify a type of object or entity within the internet. 
-Next we have to convert the BASE64 image data to binary, since machine language is in binary and uses both as input to process and predict the image. 
-We then must wait for all processing to finish (i.e. the queue size matches the number of images) and create a list containing the final prediction results.
-
-
-
+### For this set of code, we iterate over the images and for each image extract the UUID. UUID stands for “UNIVERSALLY UNIQUE IDENTIFIER”, which is a 128-bit number used to uniquely identify a type of object or entity within the internet. Next we have to convert the BASE64 image data to binary, since machine language is in binary and uses both as input to process and predict the image. We then must wait for all processing to finish (i.e. the queue size matches the number of images) and create a list containing the final prediction results.
 
     answers = []
 
