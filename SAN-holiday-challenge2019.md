@@ -6,9 +6,10 @@
 - Once, logged in talk to Santa by clicking on it 
 Santa Says:
 ![Solution](images/0-Santa.PNG)
+
 (make sure to read eveyrthing carefully and even twice sometimes when neeeded)
 
-- 
+
                                     Objective 4: Windows Log Analysis: Determine Attacker Technique
 ![]( images/Objective4-0.PNG)
 Walkthrough: SugarPlum Mary gives a clue: He mentions Sysmon and EQL. They also mention checking out a blog post about EQL by Josua WrightUpon searching I found this:
