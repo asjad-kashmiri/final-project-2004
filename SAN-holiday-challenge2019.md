@@ -409,9 +409,9 @@ For this section of code, We first have to Request a CAPTEHA, store the image da
     ).start()
     
 
-print('Waiting For Threads to Finish...')
-while q.qsize() < len(images):
-    time.sleep(0.001)
+    print('Waiting For Threads to Finish...')
+    while q.qsize() < len(images):
+      time.sleep(0.001)
 
     # Getting a list of all threads returned results
     prediction_results = [q.get() for x in range(q.qsize())]
