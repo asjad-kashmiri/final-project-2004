@@ -170,6 +170,128 @@ ly domain controllers (RODCs) and instances of AD LDS.
 - Entering the IP address 192.168.134.130 completes the objective
 ### Application:
 - In the wild, an organization using a tool like RITA can alert you to beaconing. Once the system is analyzed and confirmed to be infected, the incident response team can swiftly move on to the containment, eradication, and recovery phase. A quick response can help mitigate the damage the malware has done or intends to do.
+# Objective 6: Splunk
+
+![Solution](images/splunk.PNG)
+
+### To do this challenge we have to login in the above given link using elf and elfsocks as a password.
+- Upon logging in we are presented with 7 training questions and one challenge question. There is a window on the left where it seems like security experts of ELF U are chatting about the logs.
+### Training # 1:
+- In the chat Kent directed me to the ELFU SOC chat group where I found the answer from Alice.
+
+![Solution](images/splunk-1.PNG)
+
+- Inserting the sweetums in the training answer 1 will reveal if it's correct.
+
+![Solution](images/splunk-2.PNG)
+
+### Training # 2:
+- While reading the chat Alice tells us that “Well he is and the adversaries know it. They are always attacking him and the Elf U network trying to get to Santa”.
+- So, I jumped on the splunk and started my search by typing Santa. 11 events showed up and I went through all the logs. Only the 1st and 2nd log stood out to me. 
+
+![Solution](images/splunk-3.PNG)
+
+- In the above screenshot of the 2nd event we can see the attacker is listing out the files and recursively searching for anything that has Santa in it. 
+- Event # 1 shows an "Out-String" variable which means the attacker is reading the file, while it also shows us the path of the file.
+
+![Solution](images/splunk-4.PNG)
+
+![Solution](images/splunk-5.PNG)
+
+### Training # 3:
+- We are looking for FQDN(fully qualified domain name) that was used to command and control the powershell. I searched for sourcetype=”XmlWinEventLog:Microsoft-Windows-Sysmon/Operational”
+- The following is an example of Splunk collected data. Windows event log format is 	
+- On the left side we can click dest_host and find the FQDN as 144.202.46.214.vultr.com
+
+![Solution](images/splunk-6.PNG)
+
+![Solution](images/splunk-7.PNG)
+
+### Training # 4: looking for the document that is used to launch the powershell code.
+- Let's start our search by viewing all the powershell logs by searching for “index=main sourcetype="WinEventLog:Microsoft-Windows-Powershell/Operational" we are looking for process ID or process GUID associated with these powershell logs. We need to pivot to time in order to get that info. First reverse the event by piping with reverse.
+- “index=main sourcetype="WinEventLog:Microsoft-Windows-Powershell/Operational" | reverse”
+- Look at the Time column in your search results. If you click on the date/timestamp from that first event, you can specify a time window. Accept the default of +/- five seconds and click apply. Then remove the sourcetype search term and also remove the '| reverse' and re-run the search.
+
+![Solution](images/splunk-8.PNG)
+
+- We found 2 ProcessID’s
+
+![Solution](images/splunk-9.PNG)
+
+- Lets use these Id’s in the search to see what these did during the attack.
+- “EventCode=4688 0x187C” With this search I'm looking for the eventcode which is windows executable and the hex of the ID 6268.
+
+![Solution](images/splunk-10.PNG)
+
+- This ID shows a process command line that launched an executable named WINWORD.EXE Upon searching I found that is the executable file name for Microsoft Word which is used when Word is launched. 
+- The Microsoft word file is in the 2nd event, 1st event only shows the program that was used to open that file.
+
+![Solution](images/splunk-11.PNG)
+
+### Training # 5:looking for a number of unique email addresses that were used to send holiday cheer essays to professor Banas.
+- The search query i used to find the answer is:
+- index=main sourcetype=stoq | table _time 
+- results{}.workers.smtp.to 
+- results{}.workers.smtp.from  
+- results{}.workers.smtp.subject 
+- results{}.workers.smtp.body | search 
+- results{}.workers.smtp.subject="Holiday Cheer 
+- Assignment Submission
+- The search outputs 21 results 
+
+![Solution](images/splunk-12.PNG)
+
+![Solution](images/splunk-13.PNG)
+
+### Training #6: looking for the password of the zip file that was sent to professor Banas.
+- I have used this search to query the email that has the password to open the zip file.
+- sourcetype=stoq(results{}.workers.smtp.to="*carl.banas@faculty.elfu.org*" results{}.workers.smtp.body=*password* | table _time results{}.workers.smtp.body
+- Breakout of the search parameter: stoq: stoQ is an automation framework that helps to simplify the mundane and repetitive tasks an analyst is required to do.
+- Then I used the professor's email body for passwords. It will show us all the emails sent to the professor that has a word password in the body of text.
+
+![Solution](images/splunk-14.PNG)
+
+### Training # 7: We are looking for the email that was used to send a suspicious zip file to the professor. I modified the same search results that were used to find the password.
+- sourcetype=stoq 
+results{}.workers.smtp.to="*carl.banas@faculty.elfu.org*" 
+results{}.workers.smtp.body=*password* 
+| table _time results{}.workers.smtp.from results{}.workers.smtp.body
+
+- The last line pipes the table into time column, mail coming from column and the body of the email.
+
+![Solution](images/splunk-15.PNG)
+
+### Now the challenge question: What was the message for Kent that the adversary embedded in this attack?
+- We are provided with a search result link of splunk and another link to the file archive. Lets go to the splunk and see if we can find that docx file.
+- Splunk search:
+- index=main sourcetype=stoq  "results{}.workers.smtp.from"="bradly buttercups <bradly.buttercups@eifu.org>"
+| eval results = spath(_raw, "results{}") 
+| mvexpand results
+| eval path=spath(results, "archivers.filedir.path"), filename=spath(results, "payload_meta.extra_data.filename"), fullpath=path."/".filename 
+| search fullpath!="" 
+| table filename,fullpath
+- We are searching in the stoQ artifacts for the file coming from bradly buttercups.
+- We find the path in the splunk events 
+
+![Solution](images/splunk-16.PNG)
+
+- Lets take the path and insert it into the file archive link
+
+![Solution](images/splunk-17.PNG)
+
+- Clicked on the file and saved it. I tried and was unable to open it. Took the file into kali linux and cat it to see.
+
+![Solution](images/splunk-18.PNG)
+
+- There is a message in that file but it is not for kent. The last part of the message tells us about the file that we are looking for which is the core.xml. Let's go find the path for core.xml and then put it in the link of the file archive. It's the last event in the splunk results.
+- Downloaded the file and opened it in the linux terminal.
+
+![Solution](images/splunk-19.PNG)
+
+- Ther message in there for kent says: Kent you are so unfair. And we were going to make you the king of the Winter Carnival.
+
+![Solution](images/splunk-120.PNG)
+
 ## Objective 7: Get Access To The Steam Tunnels
 ![](images/Objective7-1.PNG)
 
