@@ -323,36 +323,45 @@ results{}.workers.smtp.body=*password*
 
 - Entering his name into the field in the objective completes the challenge.
 ## Objective 8: Bypassing the Frido Sleigh CAPTEHA
+
 ![]( images/Objective8-0.PNG)
 
 - Walkthrough: Underlined within the objective is Frido Sleigh Contest and upon clicking the link we are taken to the fill out form page for the contest, embedded with a CAPTCHA challenge. Snippets are shown below:
+
 ![]( images/Objective8-1.PNG)
 
 - The captcha requires us to select the images they ask for within a time set of 5 seconds which is completely impossible. The hint within the objective states to go and visit Alabaster Snowball in the speaker unpreparedness room. 
+
 ![]( images/Objective8-2.PNG)
 
 - Apparently Alabaster Snowball is having trouble with his terminal and is stuck in a different shell rather than it being bash, so we must help him out. Click on the Nyan shell next to Mr. Snowball.
+
 ![]( images/Objective8-3.PNG)
 
 - following the instructions within the terminal we get:
+
 ![]( images/Objective8-4.PNG)
 
 - We can clearly see this isn’t his normal terminal and he definitely has some explaining to do. Let’s open the Nyan terminal again and let’s try using cat etc/passwd - to show attributes for users on the machine, focusing to see what shell is linked to users:
+
 ![]( images/Objective8-5.PNG)
 
 - At the bottom we can see that nsh is set as the shell and not bash. We can look at the properties of the shell using ls -al /bin/nsh. Assuming we have permissions to edit /bin/nsh and copy over to /bin/nsh, we can easily allow Mr. Snowball to get his shell back. Let’s see:
+
 ![]( images/Objective8-6.PNG)
 
-- It seems that /bin/nsh is rewritable and an attempt to copy over /bin/bash to /bin/nsh, we get an error. We have to dig deeper, and by using ‘lsattr’, which is an extended version of viewing file attributes, and in this case we see that the letter ‘i’ appears. This means that the file is ‘IMMUTABLE’ meaning the file may not be tampered with. So, let’s just check to see what we can do with root permissions by running sudo -l
+- It seems that /bin/nsh is rewritable and an attempt to copy over /bin/bash to /bin/nsh, we get an error. We have to dig deeper, and by using ‘lsattr’, which is an extended version of viewing file attributes, and in this case we see that the letter ‘i’ appears. This means that the file is ‘IMMUTABLE’ meaning the file may not be tampered with. So, let’s just check to see what we can do with root permissions by running sudo -l.
+
 ![]( images/Objective8-7.PNG)
 
-- We are able to use “chattr”, a change attribute command, and what we can do is removed the immutable symbol on /bin/nsh and try copying over the actual shell and replace it with bash instead. We can run sudo chattr -i /bin/nsh , which removes the immutable flag, then use cp /bin/bash /bin/sh to copy over the right shell. After, we should be able to successfully login.
-We then continue onwards to talking with alabaster, and he reminds us about that CAPTEHA challenge earlier explained. 
+- We are able to use “chattr”, a change attribute command, and what we can do is removed the immutable symbol on /bin/nsh and try copying over the actual shell and replace it with bash instead. We can run sudo chattr -i /bin/nsh , which removes the immutable flag, then use cp /bin/bash /bin/sh to copy over the right shell. After, we should be able to successfully login. We then continue onwards to talking with alabaster, and he reminds us about that CAPTEHA challenge earlier explained. 
+
 ![]( images/Objective8-8.PNG)
 
 ![]( images/Objective8-9.PNG)
 
 - Apparently there are some references we can look at in order for us to complete the challenge. By clicking on your avatar, then clicking on Hints->Machine Learning you will be directed to this link, https://www.youtube.com/watch?v=jmVPLwjm_zs , this link refers back to the video to learn about machine learning use cases within cyber security and within the video there is a github repo which relates back to the challenge. https://github.com/chrisjd20/img_rec_tf_ml_demo , is the github link which we will use for the challenge. After watching the demo, we can see how we can use a set of images to train a machine learning setup and ultimately use to identify other images.
+
 ![]( images/Objective8-10.PNG)
 
 - Above are the files found within the repo /img_rec_tf_ml_demo. Since there is a foundation of resources, let’s see if we can find more hints. 
@@ -360,6 +369,7 @@ We then continue onwards to talking with alabaster, and he reminds us about that
 
 - Since Krampus gave us a heads up on the contest, let’s go and speak with him to see what else he can say. 
 - He gives us two links he would like us to work with:
+
 ![]( images/Objective8-12.PNG)
 
 - Clicking those two underlined links, allows us to download files, 12k images associated with an API interface he is building. We get a zip folder as a well as a python file, and unzipping the folder we see folders split show categories, the same as the CAPTEHA challenge. 
