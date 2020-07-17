@@ -2,9 +2,12 @@
 - Register for Kringle-Con by going to their website and clicking on the top right corner on Past Challengese then scroll down
   and click on challange under 2019 then scroll down and click on teh ticket. it will take you to registration page.
 - Once you register you will start the game from train station and will be presented with the screen where there is a character(user) and Santa.
+
 ![Solution](images/objective-0.PNG)
+
 - Once, logged in talk to Santa by clicking on it 
 Santa Says:
+
 ![Solution](images/0-Santa.PNG)
 
 - (make sure to read eveyrthing carefully and even twice sometimes when neeeded)
@@ -14,14 +17,21 @@ Santa Says:
 - Santa Says:
 
 ![Solution](images/1-Santa.PNG)
+
 - Santa needs our help and wants us to find the missing turtle doves. The point of this objective is wander around getting familiar with the ELF U. Santa also mentioned to come back to him once done with the objectives.
 - Santa mentions a badge on the player's chest which looks like a circle and upon clicking  it has all the objectives and much more.
+
 ![Solution](images/badge.PNG)
+
 ## objective 1 - Find the Turtle Doves
 - Wander around a little bit, google how turtle doves look like and you will find them in the Student union building next to the fire place.
+
 ![Solution](images/turtle-dove.PNG)
+
 ### For more objectives click on the badge and then objectives
+
 ![Solution](images/objective-2.PNG)
+
 ## Objective 2 - Unredact Threatening Document
 - This objective comes with instructions that are below
 - Someone sent a threatening letter to Elf University. What is the first word in ALL CAPS in the subject line of the letter? Please find the letter in the Quad.
@@ -29,11 +39,14 @@ Santa Says:
 - After wandering for few minutes I found it hiding in the corner of the Quad.
 
 ![Solution](images/letter.PNG)
+
 - click on the letter and it will open it up in the pdf.
 
 ![Solution](images/open-letter.PNG)
+
 - Now we are only concerned about the messages written in all capital letters in the Subject field.
 ## Objective 3 - Windows Log Analysis: Evaluate Attack Outcome
+
 ![Solution](images/log-1.PNG)
 
 ### We're given the event logs file, and tasked to find the account that was compromised using the password spray attack.
@@ -43,6 +56,7 @@ Santa Says:
 
 - We are looking for the log that shows an account that was compromised by the password-spraying attack.
 - Upon opening the log file in Event Log, I noticed that the Event ID 4624 shows “An Account Was Successfully Logged on”.
+
 ![Solution](images/log-3.PNG)
 
 -  So, I filtered the log file using the event number. Reading through log entries I found 3 different account names that were compromised DC1$, supatree, pminstix. We can ignore DC1$ because that seems to be the Domain Controller.
@@ -62,10 +76,13 @@ Santa Says:
 - In this screenshot you can clearly see that all the id events are 4625 which means login attempts made by spray attack failed and after this failed attempt there is an event Id with 4624 which shows the account was successfully logged in and that account name is supatree.
 
 ## Objective 4: Windows Log Analysis: Determine Attacker Technique
+
 ![]( images/Objective4-0.PNG)
+
 - Walkthrough: SugarPlum Mary gives a clue: He mentions Sysmon and EQL. They also mention checking out a blog post about EQL by Josua WrightUpon searching I found this:
 https://www.sans.org/blog/eql-threat-hunting/
 - We can see the line “these normalized Sysmon logs” is underlined, and by clicking the link, we end up downloading a zip file containing the following file underneath:
+
 ![]( images/Objecive4-1.PNG)
 
 - We can see here a json file for data from Sysmon. System monitor (Sysmon) is a Windows based system service and driver which remains dwelling across the machine to monitor and log system activity to the Windows event log.
@@ -82,6 +99,7 @@ https://www.sans.org/blog/eql-threat-hunting/
         "process_path": "C:\\Windows\\System32\\wevtutil.exe",
        
 - According to this, we can see that a command to open up wevtutil.exe has been initiated and certain categories such as process id’s, logon-id’s and the process path is being shown as well. 
+
 ![]( images/Objective4-2.PNG)
 
 - Here we can see a breakdown of the elements in relation to the text above: 
@@ -90,6 +108,7 @@ To read more info, the following link can be clicked on:
 - All that is being shown is activity which is going on within a system. The question states we must analyze the lsass.exe process. The lsass.exe file is permanently located in the \Windows\System32\ folder and is used to enforce security policies, meaning that it’s involved with things like password changes and login verifications. More information on this file can be found at: “https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service”
 - Instead of manually having to dig through the text file, we can just do a sequential type search on notepad or any other text editor to get us to where lsass.exe is being initiated. The process goes as:
 - Open the text file using the text editor of your choice, hit ‘CTRL + F’ and search for:
+
 ![]( images/Objective4-3.PNG)
 
 - You will then be directed to where the tool is being used and we can see that:
@@ -145,14 +164,17 @@ ly domain controllers (RODCs) and instances of AD LDS.
 - In conclusion, we can confidently state that ntdsutil.exe is the tool the attacker used to retrieve domain password hashes from the lsass.exe process.  
 # Answer: ntdsutil
 ## Objective 5: Windows Log Analysis: Determine Compromised System
+
 ![](images/Objective5-1.png)
 
 - We need to identify an infected system using Zeek logs.
 - The first thing that must be done is to download &#39;elfu-zeeklogs.zip.&#39; Then the file needs to be unzipped.
 - Open &#39;elfu-zeeklogs&#39; and then the ELFU folder. Next, open index.html.
+
 ![](images/Objective5-2.png)
 
 - Click on ELFU
+
 ![](images/Objective5-3.png)
 
 - We notice that this browser is using RITA to analyze the Zeek log files. 
@@ -161,10 +183,12 @@ ly domain controllers (RODCs) and instances of AD LDS.
 ### What is Beaconing?
 - Beaconing is the practice of sending short and regular communications from an infected host to an attacker-controlled host to communicate that the infected host malware is alive, functioning, and ready for instructions. It is one of the first network-related indications of a botnet or a peer-to-peer malware infection. Typically after malware gets a foothold on a host it quickly determines the host environment and calls out to its Command and Control infrastructure.
 - On the browser click Beacon analysis
+
 ![](images/Objective5-4.png)
 
 - RITA breaks out the analysis based on sets of IP addresses. All communications are inspected for repeating intervals and even attempts to skew the results.
 - The first column is labeled &quot;Score.&quot; The score ranges from 0-1 on the likelihood of communications between the two systems being a beacon. If you look closely at the first line, you&#39;ll see that the score is .998 between IP addresses 192.168.134.130 and 144.202.46.214. This is almost a perfect 1.0 score, so this is clearly beacon behavior.
+
 ![](images/Objective5-5.png)
 
 - Entering the IP address 192.168.134.130 completes the objective
@@ -293,6 +317,7 @@ results{}.workers.smtp.body=*password*
 ![Solution](images/splunk-120.PNG)
 
 ## Objective 7: Get Access To The Steam Tunnels
+
 ![](images/Objective7-1.PNG)
 
 - In order to get to the steam tunnels we need to go to the dorm. Inside the dorms we see Krumpus go into the room on the far right. We follow him into the room and notice a poster of Albert Einstein on the wall. Krumpus pauses and then goes through another door. The door is locked but there is a Schlage key hole.
@@ -303,6 +328,7 @@ results{}.workers.smtp.body=*password*
 - At this point we open the console and click on the Talks category and click on Optical Decoding of Keys by Deviant Ollam. He states, &quot;It is possible to use a photograph of a key to reverse-engineer out the bitting data, a series of numbers that can be used to produce a copy, even if you never have the source key in your physical possession.&quot;
 - We now know that we can get the bitting values to enter into the cutting machine by comparing the key to the chart Deviant Ollam has posted on his GitHub. [https://github.com/deviantollam/decoding/blob/master/Key%20Decoding/Decoding%20-%20Schlage.png](https://github.com/deviantollam/decoding/blob/master/Key%20Decoding/Decoding%20-%20Schlage.png)
 - Going back into the first room we then need to use the web browser dev tools. Click the inspect element and then look for the image files. In the images folder you need to navigate to krampus.png. Save the file so we can get the key values.
+
 ![](images/Objective7-3.png)
 
 - After saving the image you need to use the template to get the values
@@ -310,13 +336,16 @@ results{}.workers.smtp.body=*password*
 ![](images/Objective7-4.png)
 
 - After messing around with the template and picture of the key we can see the key values
+
 ![](images/Objective7-5.png)
 
 - Enter the values in the bitting machine and press cut. 
+
 ![](images/Objective7-6.PNG)
 
 - Once the key is done click on the key to download it.
 - In the next room click on the hanging keys and use the downloaded file (key) to get through the door.
+
 ![](images/Objective7-7.PNG)
 
 - Walk through the door and at the end of the hall you&#39;ll see Krampus. When you click on him he tells you his full name. Krampus Hollyfeld.
@@ -373,9 +402,11 @@ results{}.workers.smtp.body=*password*
 ![]( images/Objective8-12.PNG)
 
 - Clicking those two underlined links, allows us to download files, 12k images associated with an API interface he is building. We get a zip folder as a well as a python file, and unzipping the folder we see folders split show categories, the same as the CAPTEHA challenge. 
+
 ![]( images/Objective8-13.PNG)
 
 - We will use this with the script provided within the github repo. Before that let’s see how the api module works for the capetha request by visiting, “fridosleigh.com/api/capteha/request
+
 ![]( images/Objective8-14.PNG)
 
 - API stands for Application Programming Interface which is a set of functions and procedures allowing the creation of applications that access the features or data of an operating system, application, or other service. What we see is BASE64 encoded image information along with UUID’s for those images. Our job is to submit the right images which correspond with the encoded images in order to succesfully complete the CAPTEHA challenge. It is now our job to update the code for python file capteha_api.py
@@ -437,15 +468,13 @@ results{}.workers.smtp.body=*password*
          answers.append(prediction['img_uuid'])
 
     final_answer = ','.join(answers)
-    
-    
-    
-    
 
 - Finally for this last piece of code, it gets looped over the prediction results and, if an image matches a requested type, add its UUID to the answer list. The rest of the untouched code from the original python file stays in place, only with the exception of changing the email within user info to retrieve the code. 
+
 ![]( images/Objective8-15.PNG)
 
 - After running the code you end up getting a message at the end of the program stating that the code has been sent to your email. Upon checking your email you can see that the code you receive is:
 ## Answer: 8Ia8LiZEwvyZr2WO
+
 ![]( /imagesObjective8-16.PNG)
 
