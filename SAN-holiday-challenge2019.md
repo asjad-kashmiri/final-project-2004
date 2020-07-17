@@ -87,13 +87,13 @@ After messing around with the template and picture of the key we can see the key
 
 Enter the values in the bitting machine and press cut. 
 
-![](images/Objective7-6.png)
+![](images/Objective7-6.PNG)
 
 Once the key is done click on the key to download it.
 
 In the next room click on the hanging keys and use the downloaded file (key) to get through the door.
 
-![](images/Objective7-7.png)
+![](images/Objective7-7.PNG)
 
 Walk through the door and at the end of the hall you&#39;ll see Krampus. When you click on him he tells you his full name. Krampus Hollyfeld.
 
