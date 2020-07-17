@@ -12,6 +12,7 @@ Santa Says:
 ## Objective 0 - Talk To Santa
 - The first objective starts by going to the area name 'The Quad' where you meet Santa and talk to him. once finish talking to Santa, you will be finishing up the objective 0 and more objectives will open.
 - Santa Says:
+
 ![Solution](images/1-Santa.PNG)
 - Santa needs our help and wants us to find the missing turtle doves. The point of this objective is wander around getting familiar with the ELF U. Santa also mentioned to come back to him once done with the objectives.
 - Santa mentions a badge on the player's chest which looks like a circle and upon clicking  it has all the objectives and much more.
