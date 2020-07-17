@@ -45,6 +45,15 @@ Santa Says:
 ![Solution](images/open-letter.PNG)
 
 - Now we are only concerned about the messages written in all capital letters in the Subject field.
+- We have to unredact the letter to see what is written in subject field.
+- I googled and found out that it can be done by just copying the text and pasting it in the text editor 
+
+![Solution](images/letter-2.PNG)
+
+- As you can see in the subject fied the capitalized word is DEMAND.
+
+![Solution](images/letter-1.PNG)
+
 ## Objective 3 - Windows Log Analysis: Evaluate Attack Outcome
 
 ![Solution](images/log-1.PNG)
