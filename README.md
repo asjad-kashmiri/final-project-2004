@@ -16,4 +16,6 @@
    <p align="center">
   <img width="460" height="300" src="images/goldenticket.PNG">
 </p>
+
+# Have Fun! Keep Learning and thank you for visiting this repository! Feel free to share!
    
