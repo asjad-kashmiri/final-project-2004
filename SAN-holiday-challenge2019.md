@@ -156,7 +156,8 @@ ly domain controllers (RODCs) and instances of AD LDS.
 - Going back into the first room we then need to use the web browser dev tools. Click the inspect element and then look for the image files. In the images folder you need to navigate to krampus.png. Save the file so we can get the key values.
 ![](images/Objective7-3.png)
 
-- After saving the image you need to use the template to get the values.
+- After saving the image you need to use the template to get the values
+
 ![](images/Objective7-4.png)
 
 - After messing around with the template and picture of the key we can see the key values
