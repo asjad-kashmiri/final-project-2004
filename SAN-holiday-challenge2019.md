@@ -8,4 +8,4 @@
 (make sure to read eveyrthing carefully and even twice sometime when neeeded) 
 Santa Says:
 ![Solution](0-Santa.PNG)
--once, finish talking to Santa 
+- more objectives will open once, finish talking to Santa.
