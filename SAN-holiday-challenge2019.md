@@ -117,7 +117,7 @@ ly domain controllers (RODCs) and instances of AD LDS.
 ”https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc753343(v=ws.11)”
 - In conclusion, we can confidently state that ntdsutil.exe is the tool the attacker used to retrieve domain password hashes from the lsass.exe process.  
 # Answer: ntdsutil
-## bjective 5: Windows Log Analysis: Determine Compromised System
+## Objective 5: Windows Log Analysis: Determine Compromised System
 ![](images/Objective5-1.png)
 
 - We need to identify an infected system using Zeek logs.
@@ -129,7 +129,6 @@ ly domain controllers (RODCs) and instances of AD LDS.
 ![](images/Objective5-3.png)
 
 - We notice that this browser is using RITA to analyze the Zeek log files. 
-
 ### What is RITA?
 - RITA (Real Intelligence Threat Analytics) is an open source tool that helps you identify compromised systems on your network. RITA performs many security checks, but the one that we are interested in is beacon analysis.
 ### What is Beaconing?
@@ -144,11 +143,11 @@ ly domain controllers (RODCs) and instances of AD LDS.
 - Entering the IP address 192.168.134.130 completes the objective
 ### Application:
 - In the wild, an organization using a tool like RITA can alert you to beaconing. Once the system is analyzed and confirmed to be infected, the incident response team can swiftly move on to the containment, eradication, and recovery phase. A quick response can help mitigate the damage the malware has done or intends to do.
-## Objective 7:Get Access To The Steam Tunnels
-![](images/Objective7-1.png)
+## Objective 7: Get Access To The Steam Tunnels
+![](images/Objective7-1.PNG)
 
 - In order to get to the steam tunnels we need to go to the dorm. Inside the dorms we see Krumpus go into the room on the far right. We follow him into the room and notice a poster of Albert Einstein on the wall. Krumpus pauses and then goes through another door. The door is locked but there is a Schlage key hole.
-![](images/Objective7-2.png)
+![](images/Objective7-2.PNG)
 
 - We noticed that before Krumpus went through the lock door he paused and we saw that he had a key hanging from his belt. We can guess that that is the key needed to unlock the door. Going back into the previous room with the poster on the wall we see a key cutting (bitting) machine. It looks like we can make a copy of Krumpus&#39; key but we need to get the key from him first.
 - At this point we open the console and click on the Talks category and click on Optical Decoding of Keys by Deviant Ollam. He states, &quot;It is possible to use a photograph of a key to reverse-engineer out the bitting data, a series of numbers that can be used to produce a copy, even if you never have the source key in your physical possession.&quot;
