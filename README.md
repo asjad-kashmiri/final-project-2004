@@ -8,7 +8,7 @@
  # What Goodies Can Be Found In This Repository?
    Within this repository, you will find a file named "San-holiday-challenge2019.md", which gives a basic breakdown, step-by-step walkthrough on how to tackle the KringleCon challenges if you are ever stuck! We've decided to give back those who have an interest in completing the walkthrough, so they can go ahead and knock out the challenges and overall grasp a deeper understanding of the challenges and how they play a role within the CyberSecurity world! Also, a folder named "images" can be found, and those are the images associated with the walkthrough! It'll make more sense once you browse through. :)
 
-# I never heard of KringleCon, but it sounds awesome! I would love to jump on!
+# I never heard of KringleCon, but it sounds awesome! How do I join?
    Sounds great! You can join for FREE by simply visiting 
    https://holidayhackchallenge.com/2019/
    Once you visit the site, you can scroll down to see a golden ticket displayed as such:
@@ -17,5 +17,6 @@
   <img width="460" height="300" src="images/goldenticket.PNG">
 </p>
 Follow the registration instructions and you should be good to go!
+
 # Have Fun! and thank you for visiting this repository! Feel free to share!
    
