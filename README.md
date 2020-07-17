@@ -1,4 +1,4 @@
-#                                       - Ho! Ho! Ho! Welcome to the SANS KringleCon 2019 Walkthrough! -
+#                                       - Ho! Ho! Ho! Welcome To The SANS KringleCon 2019 Walkthrough! -
 ![]( images/README.png)
 # A Quick OverView On KringleCon 2019
    Bringing back the most amazing time of the year again! SANS KringleCon is back! Have no fear! Santa Clause is here! 
