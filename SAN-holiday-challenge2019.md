@@ -8,7 +8,28 @@ Santa Says:
 ![Solution](images/0-Santa.PNG)
 
 - (make sure to read eveyrthing carefully and even twice sometimes when neeeded)
-
+-  There is a map of kringle con that will help you navigate the campus easily and  can be accessed via clicking on the link below. https://media.salaheldin.online/images/map.original.jpg
+## Objective 0 - Talk To Santa
+- The first objective starts by going to the area name 'The Quad' where you meet Santa and talk to him. once finish talking to Santa, you will be finishing up the objective 0 and more objectives will open.
+- Santa Says:
+![Solution](images/1-Santa.PNG)
+- Santa needs our help and wants us to find the missing turtle doves. The point of this objective is wander around getting familiar with the ELF U. Santa also mentioned to come back to him once done with the objectives.
+- Santa mentions a badge on the player's chest which looks like a circle and upon clicking  it has all the objectives and much more.
+![Solution](images/badge.PNG)
+## objective 1 - Find the Turtle Doves
+- Wander around a little bit, google how turtle doves look like and you will find them in the Student union building next to the fire place.
+![Solution](images/turtle-dove.PNG)
+### For more objectives click on the badge and then objectives
+![Solution](images/objective-2.PNG)
+## Objective 2 - Unredact Threatening Document
+- This objective comes with instructions that are below
+- Someone sent a threatening letter to Elf University. What is the first word in ALL CAPS in the subject line of the letter? Please find the letter in the Quad.
+- First we have to find the letter.
+- After wandering for few minutes I found it hiding in the corner of the Quad.
+![Solution](images/letter.PNG)
+- click on the letter and it will open it up in the pdf.
+![Solution](images/open-letter.PNG)
+- Now we are only concerned about the messages written in all capital letters in the Subject field.
 
                                     Objective 4: Windows Log Analysis: Determine Attacker Technique
 ![]( images/Objective4-0.PNG)
