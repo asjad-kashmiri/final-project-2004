@@ -18,5 +18,5 @@
 </p>
 Follow the registration instructions and you should be good to go!
 
-# Have Fun! and thank you for visiting this repository! Feel free to share!
+# Feel free to share this repository. Enjoy and have fun!
    
