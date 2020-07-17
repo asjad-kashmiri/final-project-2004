@@ -27,8 +27,10 @@ Santa Says:
 - Someone sent a threatening letter to Elf University. What is the first word in ALL CAPS in the subject line of the letter? Please find the letter in the Quad.
 - First we have to find the letter.
 - After wandering for few minutes I found it hiding in the corner of the Quad.
+
 ![Solution](images/letter.PNG)
 - click on the letter and it will open it up in the pdf.
+
 ![Solution](images/open-letter.PNG)
 - Now we are only concerned about the messages written in all capital letters in the Subject field.
 
