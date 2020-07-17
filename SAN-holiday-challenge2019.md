@@ -422,18 +422,18 @@ results{}.workers.smtp.body=*password*
       types = [x.strip() for x in r.json()['select_type'].split(',')]
       types[-1] = types[-1].replace('and ', '')
 - For this section of code, We first have to Request a CAPTEHA, store the image data, and parse out the image types we need to select for the challenege.
-### Can use queues and threading to speed up the processing
+- Can use queues and threading to speed up the processing
     q = queue.Queue()
-### Going to iterate over each of our images.
+- Going to iterate over each of our images.
     for image in images:
       img_uuid = image['uuid']
       img_base64 = image['base64']
       print('Processing Image {}'.format(img_uuid))
-### We don't want to process too many images at once. 10 threads max
+- We don't want to process too many images at once. 10 threads max
     while len(threading.enumerate()) > 10:
         time.sleep(0.0001)
-### Predict_image function is expecting png image bytes so we read
-### image as 'rb' to get a bytes object
+- Predict_image function is expecting png image bytes so we read
+- image as 'rb' to get a bytes object
     image_bytes = base64.b64decode(img_base64)
     threading.Thread(
         target=predict_image,
@@ -451,10 +451,10 @@ results{}.workers.smtp.body=*password*
     print('Waiting For Threads to Finish...')
     while q.qsize() < len(images):
       time.sleep(0.001)
-    # Getting a list of all threads returned results
+- Getting a list of all threads returned results
     prediction_results = [q.get() for x in range(q.qsize())]
 
-### For this set of code, we iterate over the images and for each image extract the UUID. UUID stands for “UNIVERSALLY UNIQUE IDENTIFIER”, which is a 128-bit number used to uniquely identify a type of object or entity within the internet. Next we have to convert the BASE64 image data to binary, since machine language is in binary and uses both as input to process and predict the image. We then must wait for all processing to finish (i.e. the queue size matches the number of images) and create a list containing the final prediction results.
+- For this set of code, we iterate over the images and for each image extract the UUID. UUID stands for “UNIVERSALLY UNIQUE IDENTIFIER”, which is a 128-bit number used to uniquely identify a type of object or entity within the internet. Next we have to convert the BASE64 image data to binary, since machine language is in binary and uses both as input to process and predict the image. We then must wait for all processing to finish (i.e. the queue size matches the number of images) and create a list containing the final prediction results.
 
     answers = []
 
@@ -474,7 +474,7 @@ results{}.workers.smtp.body=*password*
 ![]( images/Objective8-15.PNG)
 
 - After running the code you end up getting a message at the end of the program stating that the code has been sent to your email. Upon checking your email you can see that the code you receive is:
-## Answer: 8Ia8LiZEwvyZr2WO
+- Answer: 8Ia8LiZEwvyZr2WO
 
 ![]( /imagesObjective8-16.PNG)
 
