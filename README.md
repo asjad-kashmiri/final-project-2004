@@ -16,7 +16,7 @@
    <p align="center">
   <img width="460" height="300" src="images/goldenticket.PNG">
 </p>
-Follow the registration instructions and you should be good to go!
+Go ahead and click the ticket, follow the registration instructions and you should be good to go!
 
 # Feel free to share this repository. Enjoy and have fun!
    
