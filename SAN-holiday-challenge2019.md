@@ -7,5 +7,5 @@
 - To do this objective we have to talk to Santa by clicking on it and objective completes when santa starts repeating the same text.
 (make sure to read eveyrthing carefully and even twice sometime when neeeded) 
 Santa Says:
-![Solution](mages/0-Santa.PNG)
+![Solution](images/0-Santa.PNG)
 - more objectives will open once, finish talking to Santa.
