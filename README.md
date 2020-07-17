@@ -18,5 +18,5 @@
 </p>
 Go ahead and click the ticket, follow the registration instructions and you should be good to go!
 
-# Feel free to share this repository! Enjoy and have fun!
+# Feel free to share this repository! Enjoy!
    
