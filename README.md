@@ -13,5 +13,5 @@
    https://holidayhackchallenge.com/2019/
    Once you visit the site, you can scroll down to see a golden ticket displayed here:
    
-   ![]( images/goldenticket.PNG)
+                  ![]( images/goldenticket.PNG)
    
