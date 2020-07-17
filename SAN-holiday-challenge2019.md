@@ -7,7 +7,7 @@
 Santa Says:
 ![Solution](images/0-Santa.PNG)
 
-(make sure to read eveyrthing carefully and even twice sometimes when neeeded)
+- (make sure to read eveyrthing carefully and even twice sometimes when neeeded)
 
 
                                     Objective 4: Windows Log Analysis: Determine Attacker Technique
