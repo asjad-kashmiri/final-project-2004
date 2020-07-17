@@ -10,12 +10,12 @@ Santa Says:
 
 - 
                                     Objective 4: Windows Log Analysis: Determine Attacker Technique
-![]( Objective4-0.PNG)
+![]( images/Objective4-0.PNG)
 Walkthrough: SugarPlum Mary gives a clue: He mentions Sysmon and EQL. They also mention checking out a blog post about EQL by Josua WrightUpon searching I found this:
 https://www.sans.org/blog/eql-threat-hunting/
 We can see the line “these normalized Sysmon logs” is underlined, and by clicking the link, we end up downloading a zip file containing the following file underneath:
 
-![]( Objecive4-1.PNG)
+![]( images/Objecive4-1.PNG)
 
 We can see here a json file for data from Sysmon. System monitor (Sysmon) is a Windows based system service and driver which remains dwelling across the machine to monitor and log system activity to the Windows event log.
 A JSON or JavaScript Object Notation, is a minimal, readable format for structuring data. After opening a file we see a bunch of text, starting from the beginning: (snippet shown below:)
@@ -39,7 +39,7 @@ A JSON or JavaScript Object Notation, is a minimal, readable format for structur
        
 According to this, we can see that a command to open up wevtutil.exe has been initiated and certain categories such as process id’s, logon-id’s and the process path is being shown as well. 
 
-![]( Objective4-2.PNG)
+![]( images/Objective4-2.PNG)
 
 Here we can see a breakdown of the elements in relation to the text above: 
 To read more info, the following link can be clicked on: 
@@ -50,7 +50,7 @@ All that is being shown is activity which is going on within a system. The quest
 Instead of manually having to dig through the text file, we can just do a sequential type search on notepad or any other text editor to get us to where lsass.exe is being initiated. The process goes as:
 Open the text file using the text editor of your choice, hit ‘CTRL + F’ and search for:
 
-![]( Objective4-3.PNG)
+![]( images/Objective4-3.PNG)
 
 You will then be directed to where the tool is being used and we can see that:
 
